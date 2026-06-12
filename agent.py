@@ -42,6 +42,8 @@ BASE = Path(__file__).resolve().parent
 FD_BASE = "https://api.football-data.org/v4"
 # football-data competition code for the men's World Cup is "WC".
 COMPETITION = "WC"
+# Last morning brief date: the day after the final group-stage match (28 Jun 04:00).
+LAST_BRIEF_DATE = dt.date(2026, 6, 29)
 
 
 # ---------------------------------------------------------------------------
@@ -233,7 +235,11 @@ def main():
         sys.exit("Set FOOTBALL_DATA_TOKEN and SLACK_WEBHOOK_URL (see .env.example).")
 
     bets = load_bets()
-    today = dt.date.today()
+    # Use Stockholm time for "today" so the cutoff is consistent with display times.
+    today = dt.datetime.now(TZ).date() if TZ else dt.date.today()
+    if today > LAST_BRIEF_DATE:
+        print("Group stage complete — no bets loaded for this date, skipping.")
+        sys.exit(0)
     yesterday = today - dt.timedelta(days=1)
 
     # Late kickoffs (e.g. 04:00 CET) finish on the calendar day after their
