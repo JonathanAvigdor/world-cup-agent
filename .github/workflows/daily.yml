@@ -1,0 +1,31 @@
+name: Morning Brief
+
+on:
+  # 07:30 Stockholm summer time = 05:30 UTC (CEST = UTC+2).
+  # The tournament runs June 11 – July 19, entirely within CEST.
+  schedule:
+    - cron: '30 5 * * *'
+  # Manual trigger for testing — no inputs needed.
+  workflow_dispatch:
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+
+    env:
+      FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run morning brief
+        run: python agent.py
