@@ -42,8 +42,8 @@ BASE = Path(__file__).resolve().parent
 FD_BASE = "https://api.football-data.org/v4"
 # football-data competition code for the men's World Cup is "WC".
 COMPETITION = "WC"
-# Last morning brief date: the day after the final group-stage match (28 Jun 04:00).
-LAST_BRIEF_DATE = dt.date(2026, 6, 29)
+# Last morning brief date: covers through the final Round of 16 match (4 Jul 03:30).
+LAST_BRIEF_DATE = dt.date(2026, 7, 4)
 
 
 # ---------------------------------------------------------------------------
@@ -53,6 +53,7 @@ LAST_BRIEF_DATE = dt.date(2026, 6, 29)
 SV_TO_EN = {
     "Mexiko": "Mexico", "Sydafrika": "South Africa", "Sydkorea": "South Korea",
     "Tjeckien": "Czechia", "Kanada": "Canada", "Bosnien-Herzegovina": "Bosnia-Herzegovina",
+    "Bosnien Hercegovina": "Bosnia-Herzegovina",
     "USA": "United States", "Paraguay": "Paraguay", "Qatar": "Qatar", "Schweiz": "Switzerland",
     "Brasilien": "Brazil", "Marocko": "Morocco", "Haiti": "Haiti", "Skottland": "Scotland",
     "Australien": "Australia", "Turkiet": "Turkey", "Tyskland": "Germany", "Curacao": "Curaçao",
